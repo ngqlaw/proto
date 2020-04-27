@@ -1,0 +1,15 @@
+import "base.proto";
+
+enum c_cmd { // 定义枚举类型
+    sub1_req_sub = 1;
+    sub1_resp_sub = 2;
+}
+
+message sub1_req_sub {
+}
+
+message sub1_resp_sub {
+    required string name = 1;
+    repeated int32 ids = 2;
+    optional string email = 3;
+}

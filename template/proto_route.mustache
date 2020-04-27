@@ -1,0 +1,15 @@
+-module(proto_route).
+
+-export([dispatch/4]).
+
+
+%% @doc 分配消息处理
+-spec ( dispatch( Cmd :: integer(), CCmd :: integer(), Msg :: tuple(), State ) ->
+    ok | {error, Reason :: term()} | {ok, State} | {ok, Reply, State}
+    when State :: term(), Reply :: binary() | list() ).
+{{#data}}
+dispatch({{main_proto_num}}, {{sub_proto_num}}, Msg, State) ->
+    mod_{{name}}:handle(Msg, State);
+{{/data}}
+dispatch(_Cmd, _CCmd, _Msg, _State) ->
+    ok.

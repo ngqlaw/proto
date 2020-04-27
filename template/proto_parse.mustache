@@ -1,0 +1,25 @@
+-module(proto_parse).
+
+-export([decode_msg/3, encode_msg/2]).
+
+
+%% @doc 解码消息
+-spec ( decode_msg(Cmd :: integer(), CCmd :: integer(), Bin :: binary()) -> Msg :: tuple() ).
+{{#data}}
+decode_msg({{main_proto_num}}, {{sub_proto_num}}, Bin) ->
+    {{module}}:decode_msg(Bin, {{action}});
+{{/data}}
+decode_msg(Cmd, CCmd, _Bin) ->
+    error({badarg, Cmd, CCmd}).
+
+
+%% @doc 编码消息
+-spec ( encode_msg(MsgName :: atom(), Msg :: tuple()) ->
+    {Cmd :: integer(), CCmd :: integer(), Bin :: binary()} ).
+{{#data}}
+encode_msg({{action}}, Msg) ->
+    Bin0 = {{module}}:encode_msg(Msg),
+    {{{main_proto_num}}, {{sub_proto_num}}, Bin0};
+{{/data}}
+encode_msg(MsgName, _Msg) ->
+    error({badarg, MsgName}).
